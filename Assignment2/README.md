@@ -13,7 +13,7 @@
   * The test class should be named `StringTests`.
   * Note: This only requires a testing project, no separate "target project" is required.
 * The work for this assignment should be done on a separate branch within your fork
-  * All of the code should be under the Assignment2 folder
+  * All of the code should be under the Assignment2 w
   * The PR should be into the master branch on the IntelliTect repository
 
 
