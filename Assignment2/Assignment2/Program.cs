@@ -1,47 +1,39 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Assignment2
 {
     public class Program
     {
-
-        public static void Main(string[] args)
+        public static void Main()
         {
-            //Referenced:
-            int i = 1;
-            string expression = "";
-            while (i.Equals(1))
+            Console.WriteLine("Please enter a mathematical operation: ");
+            string expression = Console.ReadLine();
+            string pattern = @"(-?(0|[1-9]\d*)(\.\d+)?)([+-/*])(-?(0|[1-9]\d*)(\.\d+)?)"; //Referenced for regex pattern: https://docs.microsoft.com/en-us/dotnet/api/system.string.split
+            foreach (Match m in Regex.Matches(expression, pattern)) //referenced https://www.regextester.com/
             {
-               i = PerformOperation(i, expression);
-            }
-        }
-
-        public static int PerformOperation(int i, string expression)
-        {
-            try
-            {
-          
-                Console.WriteLine("Please enter a mathematical operation. E.G., (1+3): ");
-                Console.WriteLine("Type quit, or q to exit the program");
-                expression = Console.ReadLine().ToLower();
-                if (expression.Equals("quit") || expression.Equals("q"))
-                {
-                    return 0;
-                }
-                else
-                {
-                    //Referenced: https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable.compute
-                    string value = new System.Data.DataTable().Compute(expression, null).ToString();
-                    Console.WriteLine($"{value} {Environment.NewLine}");
-                    return 1;
-                }
-
-            }
-            catch (Exception)
-            {
-                Exception e = new Exception();
-                Console.WriteLine($"Not a valid mathematical expression: \"{expression}\" {e} {Environment.NewLine}");
-                return 1;
+                if (decimal.TryParse(m.Groups[1].Value, out var num1))
+                    if (decimal.TryParse(m.Groups[5].Value, out var num2))
+                        switch (m.Groups[4].Value)
+                        {
+                            case "+":
+                                Console.WriteLine(num1 + num2);
+                                break;
+                            case "-":
+                                Console.WriteLine(num1 - num2);
+                                break;
+                            case "*":
+                                Console.WriteLine(num1 * num2);
+                                break;
+                            case "/":
+                                if (num2 == 0) //Panic!
+                                {
+                                    Console.WriteLine("Error: division by zero not allowed.");
+                                    break;
+                                }
+                                Console.WriteLine(num1 / num2);
+                                break;
+                        }
             }
         }
     }
