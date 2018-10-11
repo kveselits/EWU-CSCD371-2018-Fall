@@ -1,61 +1,92 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Reflection.Metadata.Ecma335;
 
 namespace RockPaperScissors
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             bool keepPlaying = false;
             do
             {
-                StartGame();
+                keepPlaying = StartGame();
             } while (keepPlaying);
 
         }
 
-        private static bool StartGame()
+        public static bool StartGame()
         {
             ValueTuple<int, int> health = ValueTuple.Create(100, 100);
             do
             {
-                Console.WriteLine("rock, paper, or scissors: ");
-                string move = Console.ReadLine();
-                health = SelectMove(health, move);
+                string playerMove = GetPlayerMove();
+                Console.WriteLine($"You chose {playerMove}");
+                string computerMove = GetComputerMove();
+                Console.WriteLine($"Computer chose {computerMove}");
+                health = CalculateHealth(health, playerMove, computerMove);
             } while (health.Item1 > 0 && health.Item2 > 0);
             Console.WriteLine(DetermineWinner(health));
+            return ContinueOrExit();
+        }
+
+        private static string GetPlayerMove()
+        {
+            string playerMove;
+            do
+            {
+                Console.WriteLine("Please choose a throw: 'rock', 'paper', or 'scissors': ");
+                playerMove = Console.ReadLine().Trim().ToLower();
+            } while (!(playerMove.Equals("rock") || playerMove.Equals("paper") || playerMove.Equals("scissors")));
+
+            return playerMove;
+        }
+
+        private static bool ContinueOrExit()
+        {
             Console.WriteLine("Would you like to play again? y/n: ");
             ConsoleKeyInfo keyInfo = Console.ReadKey(); //obtain first key pressed.
             return keyInfo.KeyChar == 'y'; //continue only if user selects y.
         }
 
-        private static string DetermineWinner((int, int) health)
+        public static string GetComputerMove()
         {
-            if (health.Item1 <= 0)
+            Random randomGenerator = new Random();
+            int randomNumber = randomGenerator.Next(3);
+            if (randomNumber.Equals(0))
+            {
+                return "rock";
+            }
+            else if (randomNumber.Equals(1))
+            {
+                return "paper";
+            }
+            return "scissors";
+        }
+
+        public static string DetermineWinner((int, int) health)
+        {
+            if (health.Item2 <= 0)
                 return ($"You win! {health.ToString()}");
             return ($"Sorry, you lost. {health.ToString()}");
         }
 
 
-        private static ValueTuple<int, int> SelectMove((int, int) health, string move)
+        public static ValueTuple<int, int> CalculateHealth((int, int) health, string playerMove, string computerMove)
         {
-            Random randomNumber = new Random();
-            switch (move)
+            switch (playerMove)
             {
                 case "rock":
                     {
-                        int num = randomNumber.Next(3);
-                        Console.WriteLine(num);
-                        if (num.Equals(1))
+                        if (computerMove.Equals("paper"))
                         {
                             health.Item1 -= 10;
                             Console.WriteLine(health);
                             return health;
                         }
-                        else if (num.Equals(2))
+                        else if (computerMove.Equals("scissors"))
                         {
-                            health.Item2 -= 15;
+                            health.Item2 -= 20;
                             Console.WriteLine(health);
                             return health;
                         }
@@ -64,16 +95,14 @@ namespace RockPaperScissors
                     }
                 case "paper":
                     {
-                        int num = randomNumber.Next(3);
-                        Console.WriteLine(num);
 
-                        if (num.Equals(0))
+                        if (computerMove.Equals("rock"))
                         {
                             health.Item2 -= 10;
                             Console.WriteLine(health);
                             return health;
                         }
-                        else if (num.Equals(2))
+                        else if (computerMove.Equals("scissors"))
                         {
                             health.Item1 -= 15;
                             Console.WriteLine(health);
@@ -84,16 +113,14 @@ namespace RockPaperScissors
                     }
                 case "scissors":
                     {
-                        int num = randomNumber.Next(3);
-                        Console.WriteLine(num);
 
-                        if (num.Equals(0))
+                        if (computerMove.Equals("rock"))
                         {
                             health.Item1 -= 20;
                             Console.WriteLine(health);
                             return health;
                         }
-                        else if (num.Equals(1))
+                        else if (computerMove.Equals("paper"))
                         {
                             health.Item2 -= 15;
                             Console.WriteLine(health);
