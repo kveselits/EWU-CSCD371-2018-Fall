@@ -106,14 +106,5 @@ namespace RockPaperScissors
             Assert.AreEqual($"No winner yet. {health.ToString()}", whoWins);
 
         }
-        /*[TestMethod]
-        public void TestWinnerFullHealth()
-        {
-
-            string expectedOutput = $@">>Please choose a move: 'rock', 'paper', or 'scissors': 
-<<rock
->>You chose 'rock'";
-            IntelliTect.TestTools.Console.ConsoleAssert.Expect(expectedOutput, Program.DetermineWinner);
-        }*/
     }
 }
