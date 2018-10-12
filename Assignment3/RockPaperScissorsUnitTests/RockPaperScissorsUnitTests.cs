@@ -68,6 +68,44 @@ namespace RockPaperScissors
             ValueTuple<int, int> testTuple = Program.CalculateHealth(tempTuple, "scissors", "scissors");
             Assert.AreEqual((100, 100), testTuple);
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestCalculateDamageNull()
+        {
+            ValueTuple<int, int> testTuple = Program.CalculateHealth(tempTuple, null, "scissors");
+        }
+        [TestMethod]
+        public void TestDetermineWinnerHumanWins()
+        {
+            ValueTuple<int, int> health = ValueTuple.Create(100, 0);
+            string whoWins = Program.DetermineWinner(health);
+            Assert.AreEqual($"You win! {health.ToString()}", whoWins);
+
+        }
+        [TestMethod]
+        public void TestDetermineWinnerComputerWins()
+        {
+            ValueTuple<int, int> health = ValueTuple.Create(0, 100);
+            string whoWins = Program.DetermineWinner(health);
+            Assert.AreEqual($"Sorry, you lost. {health.ToString()}", whoWins);
+
+        }
+        [TestMethod]
+        public void TestDetermineWinnerDraw()
+        {
+            ValueTuple<int, int> health = ValueTuple.Create(0, 0);
+            string whoWins = Program.DetermineWinner(health);
+            Assert.AreEqual($"It's a draw. {health.ToString()}", whoWins);
+
+        }
+        [TestMethod]
+        public void TestDetermineWinnerNoWinner()
+        {
+            ValueTuple<int, int> health = ValueTuple.Create(15, 45);
+            string whoWins = Program.DetermineWinner(health);
+            Assert.AreEqual($"No winner yet. {health.ToString()}", whoWins);
+
+        }
         /*[TestMethod]
         public void TestWinnerFullHealth()
         {
