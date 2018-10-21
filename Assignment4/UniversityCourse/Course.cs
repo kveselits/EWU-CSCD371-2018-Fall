@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UniversityCourse
 {
@@ -19,11 +18,12 @@ namespace UniversityCourse
             CourseSchedule = new List<Event> { ScheduleItem };
             StudentRoster = new List<Person>();
             CourseInstantiationCount++;
+            UniversityName = "Eastern Washington University";
         }
 
+        public string UniversityName { get; }
+
         public Professor ProfessorName { get => _ProfessorName; set => _ProfessorName = value; }
-
-
         public List<Event> CourseSchedule { get => _CourseSchedule; set => _CourseSchedule = value; }
         public List<Person> StudentRoster { get => _StudentRoster; set => _StudentRoster = value; }
         public int CourseInstantiationCount { get => _CourseInstantiationCount; set => _CourseInstantiationCount = value; }

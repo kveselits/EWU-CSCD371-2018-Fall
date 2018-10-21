@@ -11,6 +11,7 @@ namespace UniversityCourse.Tests
         [TestInitialize]
         public void Test_Startup()
         {
+            
             testEvent = new Event("Career Fair", "EWU", DateTime.Now, DateTime.Now.AddDays(1));
         }
         [TestMethod]
@@ -74,6 +75,12 @@ namespace UniversityCourse.Tests
             Assert.AreEqual(3, testEvent.InstantiationCount);
             Event testEvent4 = new Event("Blah3", "Blah3", DateTime.Now, DateTime.Now.AddDays(1));
             Assert.AreEqual(4, testEvent.InstantiationCount);
+        }
+
+        [TestCleanup]
+        public void clear()
+        {
+            testEvent.InstantiationCount = 0;
         }
     }
 }

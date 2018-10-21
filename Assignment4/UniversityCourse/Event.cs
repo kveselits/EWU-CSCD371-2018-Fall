@@ -25,7 +25,7 @@ namespace UniversityCourse
             EndTime = endTime;
         }
 
-        public int InstantiationCount { get => _InstantiationCount; private set => _InstantiationCount = value; }
+        public int InstantiationCount { get => _InstantiationCount; set => _InstantiationCount = value; }
 
         public string Place { get => _Place; set => _Place = value; }
 
