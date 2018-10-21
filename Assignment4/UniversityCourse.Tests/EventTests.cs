@@ -3,10 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UniversityCourse.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class EventTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestEvent()
         {
         }
     }

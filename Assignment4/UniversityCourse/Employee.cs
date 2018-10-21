@@ -1,15 +1,16 @@
 namespace UniversityCourse
 {
-	public class Employee : Person
-	{
-		public string ID
-		{
-			get;
-		}
+    public class Employee : Person
+    {
+        private string EmployeeId { get; set; }
+        public Employee(string firstName, string lastName, string password)
+            : base(firstName, lastName, password)
+        { }
 
-		public Employee(string firstName, string lastName, string id)
-			: base(firstName, lastName, id)
-		{
-		}
-	}
+        public override string Id
+        {
+            get => EmployeeId;
+            internal set => EmployeeId = value;
+        }
+    }
 }

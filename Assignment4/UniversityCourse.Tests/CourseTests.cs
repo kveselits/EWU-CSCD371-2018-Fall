@@ -1,10 +1,16 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-[TestClass]
-public class CourseTests
+namespace UniversityCourse.Tests
 {
-    [TestMethod]
-    public void TestMethod1()
+
+    [TestClass]
+    public class CourseTests
     {
+        [TestMethod]
+        public void Test_Add_New_Course()
+        {
+            Course newCourse = new Course("jap", "CRB", DateTime.UtcNow, DateTime.Now);
+        }
     }
 }
