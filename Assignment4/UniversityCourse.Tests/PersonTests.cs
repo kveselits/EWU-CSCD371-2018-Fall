@@ -43,7 +43,7 @@ public class PersonTests
     }
 
     [TestMethod]
-    public void Foo()
+    public void Test_Names_Are_Equal()
     {
         Person person = new Person("John", "Doe");
         string firstName = person.FirstName;
