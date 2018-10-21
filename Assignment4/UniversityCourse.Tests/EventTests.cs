@@ -78,7 +78,7 @@ namespace UniversityCourse.Tests
         }
 
         [TestCleanup]
-        public void clear()
+        public void Test_Cleanup_Clear()
         {
             testEvent.InstantiationCount = 0;
         }

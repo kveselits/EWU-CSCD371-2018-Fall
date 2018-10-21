@@ -7,40 +7,40 @@ namespace UniversityCourse.Tests
     [TestClass]
     public class CourseTests
     {
-        public Course TestCourse { get; set; }
+        public Course testCourse { get; set; }
 
         [TestInitialize]
         public void Test_Startup()
         {
 
-            TestCourse = new Course("CSCD 371", "Computing and Engineering Building", new Professor("Mark", "Michaelis"), 
+            testCourse = new Course("CSCD 371", "Computing and Engineering Building", new Professor("Mark", "Michaelis"), 
                 DateTime.Now, DateTime.Now.AddDays(1));
         }
         [TestMethod]
         public void Test_Check_FullName_Valid()
         {
-            Assert.AreEqual("Mark Michaelis", TestCourse.ProfessorName.Name);
+            Assert.AreEqual("Mark Michaelis", testCourse.ProfessorName.Name);
         }
 
         [TestMethod]
         public void Test_Check_FullName_NotValid()
         {
-            Assert.AreNotEqual("John Doe", TestCourse.ProfessorName.Name);
+            Assert.AreNotEqual("John Doe", testCourse.ProfessorName.Name);
         }
         [TestMethod]
         public void Test_Check_CourseName_Valid()
         {
-            Assert.AreEqual("CSCD 371", TestCourse.Name);
+            Assert.AreEqual("CSCD 371", testCourse.Name);
         }
         [TestMethod]
         public void Test_Check_CourseName_NotValid()
         {
-            Assert.AreNotEqual("CSCD 9001", TestCourse.Name);
+            Assert.AreNotEqual("CSCD 9001", testCourse.Name);
         }
         [TestMethod]
         public void Test_Check_Schedule_Valid()
         {
-            foreach (Event scheduleItem in TestCourse.CourseSchedule)
+            foreach (Event scheduleItem in testCourse.CourseSchedule)
             {
                 Assert.AreEqual(DateTime.Now.DayOfWeek, scheduleItem.StartTime.DayOfWeek);
             }
@@ -48,7 +48,7 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_Check_Schedule_NotValid()
         {
-            foreach (Event scheduleItem in TestCourse.CourseSchedule)
+            foreach (Event scheduleItem in testCourse.CourseSchedule)
             {
                 Assert.AreNotEqual(DateTime.Now.DayOfWeek, scheduleItem.EndTime.DayOfWeek);
             }
@@ -56,9 +56,9 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_Add_Student_Successs()
         {
-            TestCourse.AddPerson(new Person("Dave", "White"));
+            testCourse.AddPerson(new Person("Dave", "White"));
             bool containsStudent = false;
-            foreach (Person student in TestCourse.StudentRoster)
+            foreach (Person student in testCourse.StudentRoster)
             {
                 if (student.Name.Equals("Dave White"))
                 {
@@ -71,9 +71,9 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_Add_Student_Failure()
         {
-            TestCourse.AddPerson(new Person("John", "Doe"));
+            testCourse.AddPerson(new Person("John", "Doe"));
             bool containsStudent = false;
-            foreach (Person student in TestCourse.StudentRoster)
+            foreach (Person student in testCourse.StudentRoster)
             {
                 if (student.Name.Equals("Dave White"))
                 {
@@ -86,13 +86,13 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_GetSummaryInformation()
         {
-            Assert.AreEqual($"Name of course: {TestCourse.Name}{Environment.NewLine}" +
-                            $"Name of Professor: {TestCourse.ProfessorName.Name}{Environment.NewLine}" +
-                            $"Location of course: {TestCourse.Place}{Environment.NewLine}" +
+            Assert.AreEqual($"Name of course: {testCourse.Name}{Environment.NewLine}" +
+                            $"Name of Professor: {testCourse.ProfessorName.Name}{Environment.NewLine}" +
+                            $"Location of course: {testCourse.Place}{Environment.NewLine}" +
                             $"{Environment.NewLine}Course Schedule: {Environment.NewLine}" +
-                            $"{TestCourse.StartTime.DayOfWeek}: {TestCourse.StartTime} - " +
-                            $"{TestCourse.EndTime}{Environment.NewLine}",
-                            TestCourse.GetSummaryInformation());
+                            $"{testCourse.StartTime.DayOfWeek}: {testCourse.StartTime} - " +
+                            $"{testCourse.EndTime}{Environment.NewLine}",
+                            testCourse.GetSummaryInformation());
         }
         [TestMethod]
         public void Test_Display_Method_Course_Match()
@@ -104,18 +104,18 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_Instantiation_Count()
         {
-            Assert.AreEqual(1, TestCourse.InstantiationCount);
-            Event testEvent2 = new Event("Blah3", "Blah3", DateTime.Now, DateTime.Now.AddDays(1));
-            Assert.AreEqual(2, TestCourse.InstantiationCount);
-            Event testEvent3 = new Event("Blah4", "Blah4", DateTime.Now, DateTime.Now.AddDays(1));
-            Assert.AreEqual(3, TestCourse.InstantiationCount);
-            Event testEvent4 = new Event("Blah5", "Blah5", DateTime.Now, DateTime.Now.AddDays(1));
-            Assert.AreEqual(4, TestCourse.InstantiationCount);
+            Assert.AreEqual(1, testCourse.InstantiationCount);
+            Course testCourse1 = new Course("Blah3", "Blah3", new Professor("Michael", "Jordan"), DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(2, testCourse.InstantiationCount);
+            Course testCourse2 = new Course("Blah4", "Blah4", new Professor("Michael", "Jordan"), DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(3, testCourse.InstantiationCount);
+            Course testCourse3 = new Course("Blah5", "Blah5", new Professor("Michael", "Jordan"), DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(4, testCourse.InstantiationCount);
         }
         [TestCleanup]
-        public void clear()
+        public void Test_Cleanup_Clear()
         {
-            TestCourse.InstantiationCount = 0;
+            testCourse.InstantiationCount = 0;
         }
     }
 }
