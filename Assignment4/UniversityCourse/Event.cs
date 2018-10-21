@@ -39,7 +39,8 @@ namespace UniversityCourse
             {
                 if (value.CompareTo(_StartTime) < 0)
                 {
-                    throw new ArgumentOutOfRangeException($"End date cannot be before start date: {nameof(value)}");
+                    throw new ArgumentOutOfRangeException($"End date cannot be before start date: " +
+                                                          $"{nameof(value)}");
                 }
                 _EndTime = value;
             }

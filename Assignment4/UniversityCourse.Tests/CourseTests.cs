@@ -10,7 +10,6 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_Add_New_Course()
         {
-            Course newCourse = new Course("jap", "CRB", DateTime.UtcNow, DateTime.Now);
         }
     }
 }

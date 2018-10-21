@@ -2,59 +2,32 @@ using System;
 
 namespace UniversityCourse
 {
-
-
     public class Person
     {
-        private string Password;
-
         public string LastName { get; set; }
 
+        public string FirstName { get; set; }
 
-        private string _FirstName;
-        public string FirstName
+        public string Name
         {
-            get
-            {
-                return _FirstName;
-            }
-            set
-            {
-                _FirstName = value;
-            }
-        }
-
-        public string UserName
-        {
-            get
-            {
-                return $"{FirstName}.{LastName}";
-            }
+            get => $"{FirstName} {LastName}";
             set
             {
                 if (value is null)
                 {
-                    throw new ArgumentNullException(nameof(UserName));
+                    throw new ArgumentNullException(nameof(Name));
                 }
                 (FirstName, LastName) = ParseName(value);
             }
         }
 
-        public virtual string Id { get; internal set; }
-
-        internal bool IsValidCredentials(string userName, string password)
-        {
-            return UserName.ToLower() == userName.ToLower() &&
-                Password == password;
-        }
-
         private (string FirstName, string LastName) ParseName(string value)
         {
-            int separatorIndex = value.IndexOf('.');
+            int separatorIndex = value.IndexOf(' ');
             if (separatorIndex < 2 || separatorIndex > value.Length - 2)
             {
-                throw new ArgumentException(nameof(UserName),
-                    "UserName must be of the format <FirstName>.<LastName>");
+                throw new ArgumentException(nameof(Name),
+                    "Name must be of the format <FirstName>.<LastName>");
             }
             else
             {
@@ -63,17 +36,20 @@ namespace UniversityCourse
                     value.Length - separatorIndex - 1));
             }
         }
-
-        public Person(string userName, string password)
+        public void Deconstruct(out string firstName, out string lastName)
         {
-            UserName = userName;
-            Password = password;
+            firstName = FirstName;
+            lastName = LastName;
         }
 
-        public Person(string firstName, string lastName, string password)
+        public Person(string name)
         {
-            UserName = $"{firstName}.{lastName}";
-            Password = password;
+            Name = name;
+        }
+
+        public Person(string firstName, string lastName)
+        {
+            Name = $"{firstName} {lastName}";
         }
 
     }
