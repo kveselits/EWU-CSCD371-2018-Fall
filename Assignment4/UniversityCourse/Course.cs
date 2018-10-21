@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UniversityCourse
 {
@@ -51,7 +52,7 @@ namespace UniversityCourse
                     $"{scheduleItem.StartTime.DayOfWeek}: {scheduleItem.StartTime} - " +
                     $"{scheduleItem.EndTime}{Environment.NewLine}";
             }
-       
+        
             if (StudentRoster.Count > 0)
                 returnString += $"{Environment.NewLine}Student Roster: ";
             {

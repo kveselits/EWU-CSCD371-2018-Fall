@@ -51,45 +51,6 @@ public class PersonTests
         Assert.AreEqual<string>("John", firstName);
     }
 
-    [TestMethod]
-    public void PatternMatching()
-    {
-        Person person = new Professor("Kris", "Veselits");
-        Type type = person.GetType();
-        Person person2 = person;
-        if (person2 != null)
-        {
-        }
-
-        Person person3;
-        if ((person3 = person) != null)
-        {
-            Assert.IsTrue(person == person3);
-            Assert.AreEqual<string>("Kris", person3.FirstName);
-        }
-
-        Person person4 = person;
-        Person person5 = person4;
-        if (person5 != null)
-        {
-            person5 = person5;
-            Person person6 = person5;
-            if (!(person6.FirstName == "Kris"))
-            {
-                Professor professor;
-                if ((professor = (person5 as Professor)) != null)
-                {
-                    Professor professor2 = professor;
-                    Assert.AreEqual<string>("42", professor2.Id);
-                }
-            }
-            else
-            {
-                Assert.AreEqual<string>("Veselits", person6.LastName);
-            }
-        }
-    }
-
     [TestCleanup]
     public void CleanupTest()
     {

@@ -47,7 +47,6 @@ namespace UniversityCourse
 
         }
 
-
         public virtual string GetSummaryInformation()
         {
             return $"Name of event: {Name}{Environment.NewLine}" +
