@@ -93,5 +93,23 @@ namespace UniversityCourse.Tests
                             $"{testCourse.EndTime}{Environment.NewLine}",
                             testCourse.GetSummaryInformation());
         }
+        [TestMethod]
+        public void Test_Display_Method_Course_Match()
+        {
+            Course testCourse2 = new Course("Fake Class 101", "Nowhere", new Professor("Michael", "Jordan"),
+                DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(Application.Display(testCourse2), testCourse2.GetSummaryInformation());
+        }
+        [TestMethod]
+        public void Test_Instantiation_Count()
+        {
+            Assert.AreEqual(1, testCourse.InstantiationCount);
+            Event testEvent2 = new Event("Blah3", "Blah3", DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(2, testCourse.InstantiationCount);
+            Event testEvent3 = new Event("Blah4", "Blah4", DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(3, testCourse.InstantiationCount);
+            Event testEvent4 = new Event("Blah5", "Blah5", DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(4, testCourse.InstantiationCount);
+        }
     }
 }

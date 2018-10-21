@@ -53,6 +53,27 @@ namespace UniversityCourse.Tests
                             $"End time: {testEvent.EndTime}", 
                             testEvent.GetSummaryInformation());
         }
-
+        [TestMethod]
+        public void Test_Display_Method_Event_Match()
+        {
+            Assert.AreEqual(Application.Display(testEvent), testEvent.GetSummaryInformation());
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Test_Display_Method_Event_Match_Null_Exception()
+        {
+            Assert.AreNotEqual(Application.Display(null), testEvent.GetSummaryInformation());
+        }
+        [TestMethod]
+        public void Test_Instantiation_Count()
+        {
+            Assert.AreEqual(1, testEvent.InstantiationCount);
+            Event testEvent2 = new Event("Blah", "Blah", DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(2, testEvent.InstantiationCount);
+            Event testEvent3 = new Event("Blah2", "Blah2", DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(3, testEvent.InstantiationCount);
+            Event testEvent4 = new Event("Blah3", "Blah3", DateTime.Now, DateTime.Now.AddDays(1));
+            Assert.AreEqual(4, testEvent.InstantiationCount);
+        }
     }
 }
