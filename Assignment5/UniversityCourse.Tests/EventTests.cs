@@ -48,11 +48,12 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_GetSummaryInformation()
         {
+            Event testEvent2 = new Event("Career Fair", "EWU", DateTime.Now, DateTime.Now.AddDays(1));
             Assert.AreEqual($"Name of event: {testEvent.Name}{Environment.NewLine}" +
                             $"Location of event {testEvent.Place}{Environment.NewLine}" +
                             $"Start time: {testEvent.StartTime}{Environment.NewLine}" +
                             $"End time: {testEvent.EndTime}", 
-                            testEvent.GetSummaryInformation());
+                            testEvent2.GetSummaryInformation());
         }
         [TestMethod]
         public void Test_Display_Method_Event_Match()

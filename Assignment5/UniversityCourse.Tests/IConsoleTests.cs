@@ -8,42 +8,37 @@ namespace UniversityCourse.Tests
     [TestClass]
     public class IConsoleTests
     {
+        private RealConsole console { get; } = new RealConsole();
+
         [TestMethod]
         public void Test_Console_WriteLine()
         {
             string tempString = "Hello, how are you?";
-            Program program = new Program();
             string view =
                 @"<<Hello, how are you?
 >>Hello, how are you?";
-            ConsoleAssert.Expect(view, () => { program.WriteLine(tempString); });
+            ConsoleAssert.Expect(view, () => { console.WriteLine(tempString); });
         }
         [TestMethod]
         public void Test_Console_WriteLine_Blank()
         {
             string tempString = "";
-            Program program = new Program();
             string view =
                 @"<<
 >>";
-            ConsoleAssert.Expect(view, () => { program.WriteLine(tempString); });
+            ConsoleAssert.Expect(view, () => { console.WriteLine(tempString); });
         }
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
         public void Test_Console_WriteLine_Null()
         {
-            Program program = new Program();
-            ConsoleAssert.Expect(null, () => { program.WriteLine(null); });
+            ConsoleAssert.Expect(null, () => { console.WriteLine(null); });
         }
-        /*[TestMethod]
+        [TestMethod]
         public void Test_Console_ReadLine()
         {
-            string tempString = "";
-            Program program = new Program();
-            string view =
-                @"<<
->>";
-            ConsoleAssert.Expect(view, () => { program.ReadLine(); });
-        }*/
+            string testString = "Hello World.";
+            Assert.AreEqual(testString, console.ReadLine());
+        }
     }
 }

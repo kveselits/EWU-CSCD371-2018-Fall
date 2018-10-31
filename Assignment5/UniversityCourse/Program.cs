@@ -2,14 +2,16 @@
 
 namespace UniversityCourse
 {
-    public class Program : IConsole
+    public class Program
     {
-        private static Event _NewEvent;
+        public static Event NewEvent { get; set; }
+        public static Course NewCourse { get; set; }
 
-        public static Event NewEvent { get => _NewEvent; set => _NewEvent = value; }
+        private static readonly Program Menu = new Program();
 
         public static void Main(string[] args)
         {
+
             bool continueOperation = true; //program exits if false
             do
             {
@@ -17,33 +19,38 @@ namespace UniversityCourse
             } while (continueOperation.Equals(true));
         }
 
-        private static bool StartMenu()
+        public static bool StartMenu()
         {
-            char menuOption;
+            int menuOption;
             do
             {
                 menuOption = ObtainSelection();
-                if (menuOption.Equals('3'))
+                if (menuOption.Equals(5))
                 {
                     return false;
                 }
                 switch(menuOption)
                 {
-                    case '1':
+                    case 1:
                         NewEvent = CreateEvent();
                         break;
-                    case '2':
-                        Console.WriteLine(NewEvent.GetSummaryInformation());
+                    case 2:
+                        NewCourse = CreateCourse();
+                        break;
+                    case 3:
+                        Console.WriteLine(Application.Display(NewEvent));
+                        break;
+                    case 4:
+                        Console.WriteLine(Application.Display(NewCourse));
                         break;
                     default:
                         return true; //restart program
                 }
             } while (!menuOption.Equals(null));
             return true;
-
         }
 
-        private static Event CreateEvent()
+        public static Event CreateEvent()
         {
             Console.WriteLine("Please choose a name for the event: ");
             string tempName = Console.ReadLine();
@@ -55,10 +62,24 @@ namespace UniversityCourse
             DateTime tempEnd = ObtainDateTime();
 
             return new Event(tempName, tempLocation, tempStart, tempEnd);
-
         }
 
-        private static DateTime ObtainDateTime()
+        public static Course CreateCourse()
+        {
+            Console.WriteLine("Please choose a name for the event: ");
+            string tempName = Console.ReadLine();
+            Console.WriteLine("Please choose a location for the event: ");
+            string tempLocation = Console.ReadLine();
+            Professor tempProfessor = new Professor("Default", "Professor");
+            Console.WriteLine("Please choose a start time for the event: ");
+            DateTime tempStart = ObtainDateTime();
+            Console.WriteLine("Please choose a end time for the event: ");
+            DateTime tempEnd = ObtainDateTime();
+
+            return new Course(tempName, tempLocation, tempProfessor, tempStart, tempEnd);
+        }
+
+        public static DateTime ObtainDateTime()
         {
             DateTime tempDateTime;
             do
@@ -78,39 +99,25 @@ namespace UniversityCourse
             return tempDateTime;
         }
 
-        private static char ObtainSelection()
+        public static int ObtainSelection()
         {
-            char obtainInput;
-            do
+            while(true)
             {
                 Console.WriteLine("Please select an option: ");
                 Console.WriteLine("1: Create Event");
-                Console.WriteLine("2: Display Events");
-                Console.WriteLine("3: Quit");
-                obtainInput = Console.ReadKey(true).KeyChar;
-            } while (!(obtainInput.Equals('1')) && !(obtainInput.Equals('2')) &&
-                     !(obtainInput.Equals('3')));
-            return obtainInput;
-        }
+                Console.WriteLine("2: Create Course");
+                Console.WriteLine("3: Display Events");
+                Console.WriteLine("4: Display Courses");
+                Console.WriteLine("5: Quit");
+                string obtainInput = Console.ReadLine()?.Trim();
+                bool validInput = int.TryParse(obtainInput, out int intInput);
+                if (validInput.Equals(false) || intInput <= 0 || intInput >= 6)
+                {
+                    Console.WriteLine("Invalid input, try again");
+                }
 
-        public void Write(string line)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WriteLine(string line)
-        {
-            Console.WriteLine(line);
-        }
-
-        public string ReadLine()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Clear()
-        {
-            throw new NotImplementedException();
+                return intInput;
+            } 
         }
     }
 }

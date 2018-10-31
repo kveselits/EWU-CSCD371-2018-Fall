@@ -48,7 +48,6 @@ namespace UniversityCourse
                 }
                 _EndTime = value;
             }
-
         }
 
         public virtual string GetSummaryInformation()
