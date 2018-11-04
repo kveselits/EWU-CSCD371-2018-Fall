@@ -12,7 +12,6 @@ namespace UniversityCourse.Tests
         [TestInitialize]
         public void Test_Startup()
         {
-
             testCourse = new Course("CSCD 371", "Computing and Engineering Building", new Professor("Mark", "Michaelis"), 
                 DateTime.Now, DateTime.Now.AddDays(1));
         }
@@ -86,13 +85,16 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_GetSummaryInformation()
         {
+            Course testCourse2 = new Course("CSCD 371", "Computing and Engineering Building", new Professor("Mark", "Michaelis"),
+                DateTime.Now, DateTime.Now.AddDays(1));
             Assert.AreEqual($"Name of course: {testCourse.Name}{Environment.NewLine}" +
                             $"Name of Professor: {testCourse.ProfessorName.Name}{Environment.NewLine}" +
                             $"Location of course: {testCourse.Place}{Environment.NewLine}" +
                             $"{Environment.NewLine}Course Schedule: {Environment.NewLine}" +
                             $"{testCourse.StartTime.DayOfWeek}: {testCourse.StartTime} - " +
                             $"{testCourse.EndTime}{Environment.NewLine}",
-                            testCourse.GetSummaryInformation());
+                            Application.Display(testCourse2));
+
         }
         [TestMethod]
         public void Test_Display_Method_Course_Match()
@@ -116,6 +118,7 @@ namespace UniversityCourse.Tests
         public void Test_Cleanup_Clear()
         {
             testCourse.InstantiationCount = 0;
+            testCourse.CourseSchedule.Clear();
         }
     }
 }
