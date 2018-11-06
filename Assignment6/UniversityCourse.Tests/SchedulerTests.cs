@@ -20,7 +20,7 @@ namespace UniversityCourse.Tests
             TestSchedule = new Schedule("tuesday", "fall", NewTime, new TimeSpan(0, 12, 30, 0));
             TestSchedule2 = new Schedule("tuesday thursday friday", "winter", NewTime, new TimeSpan(0, 8, 0, 0));
         }
-
+       
         [TestMethod]
         public void Test_Size_Schedule()
         {
@@ -45,21 +45,22 @@ namespace UniversityCourse.Tests
         }
 
         [TestMethod]
+        public void Test_Valid_Multiple_Days()
+        {
+            Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToLower());
+
+        }
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Test_Invalid_Days()
         {
             Schedule testScheduleError = new Schedule("cows", "fall", NewTime, new TimeSpan(0, 12, 30, 0));
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void Test_Valid_Invalid_Term()
         {
             Schedule testScheduleError = new Schedule("monday", "not-fall", NewTime, new TimeSpan(0, 12, 30, 0));
-            Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToLower());
-
-        }
-        [TestMethod]
-        public void Test_Valid_Multiple_Days()
-        {
             Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToLower());
 
         }

@@ -51,22 +51,22 @@ namespace UniversityCourse
         {
             switch (value?.ToLower())
             {
-            case "monday":
-                return DaysOfWeek.Monday;
-            case "tuesday":
-                return DaysOfWeek.Tuesday;
-            case "wednesday":
-                return DaysOfWeek.Wednesday;
-            case "thursday":
-                return DaysOfWeek.Thursday;
-            case "friday":
-                return DaysOfWeek.Friday;
-            case "saturday":
-                return DaysOfWeek.Saturday;
-            case "sunday":
-                return DaysOfWeek.Sunday;
-            default:
-                throw new ArgumentException("Invalid input");
+                case "monday":
+                    return DaysOfWeek.Monday;
+                case "tuesday":
+                    return DaysOfWeek.Tuesday;
+                case "wednesday":
+                    return DaysOfWeek.Wednesday;
+                case "thursday":
+                    return DaysOfWeek.Thursday;
+                case "friday":
+                    return DaysOfWeek.Friday;
+                case "saturday":
+                    return DaysOfWeek.Saturday;
+                case "sunday":
+                    return DaysOfWeek.Sunday;
+                default:
+                    throw new ArgumentException("Invalid input");
             }
         }
 
@@ -102,10 +102,10 @@ namespace UniversityCourse
             {
                 get => _Quarter.ToString();
 
-            set
-            {
-                switch (value?.ToLower()?.Trim())
+                set
                 {
+                    switch (value?.ToLower()?.Trim())
+                    {
                         case "spring":
                             _Quarter = QuarterOfYear.Spring;
                             break;
@@ -120,8 +120,8 @@ namespace UniversityCourse
                             break;
                         default:
                             throw new ArgumentException(($"Not a valid quarter term: \"{value?.ToString()}\""));
+                    }
                 }
-            }
             }
             public string DayOfWeek
             {
@@ -131,6 +131,6 @@ namespace UniversityCourse
 
             public Time StartTime { get; set; }
             public TimeSpan Duration { get; set; }
-        };
+        }
     }
 }
