@@ -4,9 +4,9 @@ namespace UniversityCourse
 {
     public class Scheduler
     {
-        public static Time StartTime { get; set; } // Settings these as static seemed risky,
-                                                   // but I had to compromise to keep schedule struct under 16 bytes
-        public static TimeSpan Duration { get; set; }
+
+        public static Time _Time;
+        public static TimeSpan _Duration;
 
         [Flags]
         public enum DaysOfWeek : byte
@@ -115,15 +115,26 @@ namespace UniversityCourse
 
         public readonly struct Schedule
         {
-            public QuarterOfYear Quarter { get; }
-            public DaysOfWeek DayOfWeek { get; }
-
             public Schedule(string dayOfWeek, string quarterOfYear, Time startTime, TimeSpan duration)
             {
                 DayOfWeek = ParseString(dayOfWeek);
                 Quarter = ParseStringQuarter(quarterOfYear);
                 StartTime = startTime;
                 Duration = duration;
+            }
+            public DaysOfWeek DayOfWeek { get; }
+            public QuarterOfYear Quarter { get; }
+
+            public Time StartTime
+            {
+                get => _Time;
+                set => _Time = value;
+            }
+
+            public TimeSpan Duration
+            {
+                get => _Duration;
+                set => _Duration = value;
             }
         }
         public static void Main(string[] args)
