@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IntelliTect.TestTools.Console;
 using static UniversityCourse.Scheduler;
 
 namespace UniversityCourse.Tests

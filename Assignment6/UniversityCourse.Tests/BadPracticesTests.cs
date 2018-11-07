@@ -34,11 +34,11 @@ namespace UniversityCourse.Tests
         public void Passing_Class_To_Method_Is_Changed_In_Original_Method_New_Instance()
         {
             BadCar testCar = new BadCar("Toyota", "Prius");
-            BadCar newTestCar = BadCar.BadMethodNew(testCar);
+            testCar.BadMethodNew(ref testCar);
             Assert.AreNotEqual("Toyota", testCar.Make);
             Assert.AreNotEqual("Prius", testCar.Model);
-            Assert.AreEqual(newTestCar.Make, testCar.Make);
-            Assert.AreEqual(newTestCar.Model, testCar.Model);
+            Assert.AreEqual("Dodge", testCar.Make);
+            Assert.AreEqual("Viper", testCar.Model);
         }
         [TestMethod]
         public void Passing_Interface_To_Method_Is_Changed_In_Original_Method()

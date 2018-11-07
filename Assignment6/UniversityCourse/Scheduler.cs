@@ -126,5 +126,9 @@ namespace UniversityCourse
                 Duration = duration;
             }
         }
+        public static void Main(string[] args)
+        {
+
+        }
     }
 }

@@ -19,10 +19,10 @@ namespace UniversityCourse
             car.Make = "Ford";
             car.Model = "Pinto";
         }
-        public static BadCar BadMethodNew(BadCar newCar)
+        public void BadMethodNew(ref BadCar newCar)
         {
-            newCar = new BadCar("Dodge", "Viper");
-            return newCar;
+            BadCar betterCar = new BadCar("Dodge", "Viper");
+            newCar = betterCar;
         }
     }
     public struct BadPerson : BadPerson.IBadInterface
