@@ -4,16 +4,20 @@ namespace UniversityCourse
 {
     public class Scheduler
     {
+        public static Time StartTime { get; set; } // Settings these as static seemed risky,
+                                                   // but I had to compromise to keep schedule struct under 16 bytes
+        public static TimeSpan Duration { get; set; }
+
         [Flags]
         public enum DaysOfWeek
         {
-            Sunday = 1, //1  0000001
-            Monday = 1 << 1, //2  0000010
-            Tuesday = 1 << 2, //4  0000100
+            Sunday = 1,         //1  0000001
+            Monday = 1 << 1,    //2  0000010
+            Tuesday = 1 << 2,   //4  0000100
             Wednesday = 1 << 3, //8  0001000
-            Thursday = 1 << 4, //16 0010000
-            Friday = 1 << 5, //32 0100000
-            Saturday = 1 << 6, //64 1000000
+            Thursday = 1 << 4,  //16 0010000
+            Friday = 1 << 5,    //32 0100000
+            Saturday = 1 << 6,  //64 1000000
         }
 
         public enum QuarterOfYear
@@ -102,6 +106,11 @@ namespace UniversityCourse
             public int Minutes { get; }
 
             public int Hours { get; }
+
+            public override string ToString()
+            {
+                return $"{Hours}:{Minutes}:{Seconds}";
+            }
         }
 
         public readonly struct Schedule
@@ -116,8 +125,6 @@ namespace UniversityCourse
                 StartTime = startTime;
                 Duration = duration;
             }
-            public Time StartTime { get; }
-            public TimeSpan Duration { get; }
         }
     }
 }

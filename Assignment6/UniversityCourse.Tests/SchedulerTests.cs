@@ -10,8 +10,10 @@ namespace UniversityCourse.Tests
     public class SchedulerTests
     {
         public Time NewTime { get; private set; }
+        public Time NewTime2 { get; set; }
         public Schedule TestSchedule { get; private set; }
         public Schedule TestSchedule2 { get; private set; }
+        public Schedule TestSchedule3 { get; private set; }
 
         [TestInitialize]
         public void Test_Initialize()
@@ -19,8 +21,10 @@ namespace UniversityCourse.Tests
             NewTime = new Time(12, 30, 0);
             TestSchedule = new Schedule("tuesday", "fall", NewTime, new TimeSpan(0, 12, 30, 0));
             TestSchedule2 = new Schedule("tuesday thursday friday", "winter", NewTime, new TimeSpan(0, 8, 0, 0));
+            NewTime2 = new Time(1, 0, 0);
+            TestSchedule3 = new Schedule("saturday sunday wednesday monday", "spring", NewTime, new TimeSpan(0, 8, 0, 0));
         }
-       
+
         [TestMethod]
         public void Test_Size_Schedule()
         {
@@ -48,6 +52,18 @@ namespace UniversityCourse.Tests
         public void Test_Valid_Multiple_Days()
         {
             Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToString().ToLower());
+
+        }
+        [TestMethod]
+        public void Test_Valid_Multiple_Days_New_Time_Struct()
+        {
+            Assert.AreEqual("sunday, monday, wednesday, saturday", TestSchedule3.DayOfWeek.ToString().ToLower());
+
+        }
+        [TestMethod]
+        public void Test_Valid_Multiple_Days_New_Time_Original_Unchanged()
+        {
+            Assert.AreEqual("12:30:0", NewTime.ToString());
 
         }
         [TestMethod]
