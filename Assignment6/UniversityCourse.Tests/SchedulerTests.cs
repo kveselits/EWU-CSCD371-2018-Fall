@@ -80,5 +80,24 @@ namespace UniversityCourse.Tests
             Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToString().ToLower());
 
         }
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void Test_Valid_Invalid_Null_Day()
+        {
+            Schedule testScheduleError = new Schedule(null, "not-fall", NewTime, new TimeSpan(0, 12, 30, 0));
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Test_Valid_Invalid_Null_Quarter()
+        {
+            Schedule testScheduleError = new Schedule("monday", null, NewTime, new TimeSpan(0, 12, 30, 0));
+        }
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Test_Valid_Invalid_Null_Time()
+        {
+            int? nullInt = new int?();
+            Time newTime2 = new Time((int)nullInt, (int)nullInt, (int)nullInt);
+        }
     }
 }

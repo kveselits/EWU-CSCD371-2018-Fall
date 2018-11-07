@@ -9,7 +9,7 @@ namespace UniversityCourse
         public static TimeSpan Duration { get; set; }
 
         [Flags]
-        public enum DaysOfWeek
+        public enum DaysOfWeek : byte
         {
             Sunday = 1,         //1  0000001
             Monday = 1 << 1,    //2  0000010
@@ -28,7 +28,7 @@ namespace UniversityCourse
             Winter,
         }
 
-        public static DaysOfWeek ParseString(string value)
+        private static DaysOfWeek ParseString(string value)
         {
             string[] daysArray = value.Split(' ');
 
@@ -75,7 +75,7 @@ namespace UniversityCourse
             }
         }
 
-        public static QuarterOfYear ParseStringQuarter(string value)
+        private static QuarterOfYear ParseStringQuarter(string value)
         {
             switch (value?.ToLower()?.Trim())
             {
