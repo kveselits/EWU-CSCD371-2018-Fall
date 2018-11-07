@@ -41,13 +41,13 @@ namespace UniversityCourse.Tests
         [TestMethod]
         public void Test_Valid_Single_Day()
         {
-            Assert.AreEqual("tuesday", TestSchedule.DayOfWeek.ToLower());
+            Assert.AreEqual("tuesday", TestSchedule.DayOfWeek.ToString().ToLower());
         }
 
         [TestMethod]
         public void Test_Valid_Multiple_Days()
         {
-            Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToLower());
+            Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToString().ToLower());
 
         }
         [TestMethod]
@@ -61,7 +61,7 @@ namespace UniversityCourse.Tests
         public void Test_Valid_Invalid_Term()
         {
             Schedule testScheduleError = new Schedule("monday", "not-fall", NewTime, new TimeSpan(0, 12, 30, 0));
-            Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToLower());
+            Assert.AreEqual("tuesday, thursday, friday", TestSchedule2.DayOfWeek.ToString().ToLower());
 
         }
     }

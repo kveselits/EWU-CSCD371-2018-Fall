@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace UniversityCourse
 {
@@ -8,14 +7,15 @@ namespace UniversityCourse
         [Flags]
         public enum DaysOfWeek
         {
-            Sunday = 1,         //1  0000001
-            Monday = 1 << 1,    //2  0000010
-            Tuesday = 1 << 2,   //4  0000100
+            Sunday = 1, //1  0000001
+            Monday = 1 << 1, //2  0000010
+            Tuesday = 1 << 2, //4  0000100
             Wednesday = 1 << 3, //8  0001000
-            Thursday = 1 << 4,  //16 0010000
-            Friday = 1 << 5,    //32 0100000
-            Saturday = 1 << 6,  //64 1000000
+            Thursday = 1 << 4, //16 0010000
+            Friday = 1 << 5, //32 0100000
+            Saturday = 1 << 6, //64 1000000
         }
+
         public enum QuarterOfYear
         {
             Spring,
@@ -43,6 +43,7 @@ namespace UniversityCourse
                 {
                     days |= ParseDays(item);
                 }
+
                 return days;
             }
         }
@@ -70,6 +71,23 @@ namespace UniversityCourse
             }
         }
 
+        public static QuarterOfYear ParseStringQuarter(string value)
+        {
+            switch (value?.ToLower()?.Trim())
+            {
+                case "spring":
+                    return QuarterOfYear.Spring;
+                case "summer":
+                    return QuarterOfYear.Summer;
+                case "fall":
+                    return QuarterOfYear.Fall;
+                case "winter":
+                    return QuarterOfYear.Winter;
+                default:
+                    throw new ArgumentException(($"Not a valid quarter term: \"{value?.ToString()}\""));
+            }
+        }
+
         public readonly struct Time
         {
             public Time(int hours, int minutes, int seconds)
@@ -84,53 +102,22 @@ namespace UniversityCourse
             public int Minutes { get; }
 
             public int Hours { get; }
-        };
-        public struct Schedule
-        {
-            private DaysOfWeek _DayOfWeek;
-            private QuarterOfYear _Quarter;
+        }
 
-            public Schedule(string dayOfWeek, string quarterOfYear, Time startTime, TimeSpan duration) : this()
+        public readonly struct Schedule
+        {
+            public QuarterOfYear Quarter { get; }
+            public DaysOfWeek DayOfWeek { get; }
+
+            public Schedule(string dayOfWeek, string quarterOfYear, Time startTime, TimeSpan duration)
             {
-                DayOfWeek = dayOfWeek;
-                Quarter = quarterOfYear;
+                DayOfWeek = ParseString(dayOfWeek);
+                Quarter = ParseStringQuarter(quarterOfYear);
                 StartTime = startTime;
                 Duration = duration;
             }
-
-            public string Quarter
-            {
-                get => _Quarter.ToString();
-
-                set
-                {
-                    switch (value?.ToLower()?.Trim())
-                    {
-                        case "spring":
-                            _Quarter = QuarterOfYear.Spring;
-                            break;
-                        case "summer":
-                            _Quarter = QuarterOfYear.Summer;
-                            break;
-                        case "fall":
-                            _Quarter = QuarterOfYear.Fall;
-                            break;
-                        case "winter":
-                            _Quarter = QuarterOfYear.Winter;
-                            break;
-                        default:
-                            throw new ArgumentException(($"Not a valid quarter term: \"{value?.ToString()}\""));
-                    }
-                }
-            }
-            public string DayOfWeek
-            {
-                get => _DayOfWeek.ToString();
-                set => _DayOfWeek = ParseString(value);
-            }
-
-            public Time StartTime { get; set; }
-            public TimeSpan Duration { get; set; }
+            public Time StartTime { get; }
+            public TimeSpan Duration { get; }
         }
     }
 }
