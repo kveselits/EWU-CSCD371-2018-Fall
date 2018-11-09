@@ -1,36 +1,39 @@
 ﻿using System;
 
-public struct NonNullable<T> where T : class
+namespace Assignment7
 {
-    private readonly T value;
-    public NonNullable(T value)
+    /*
+     Caveats:
+     1. Passing in a null value won't give a warning at compile time,
+        so we're forced to deal with the exception somehow. 
+     2. Methods accessing _Value can still cause a NullReferenceException.
+        So null checks are still necessary when accessing the _Value field.
+     */
+    public struct NonNullable<T>
     {
-        if (value == null)
-        {
-            throw new ArgumentNullException(value);
-        }
-        this.value = value;
-    }
+        private readonly T _Value;
 
-    public T Value
-    {
-        get
+        public NonNullable(T value)
         {
             if (value == null)
             {
-                throw new NullReferenceException();
+                throw new ArgumentNullException(nameof(value));
             }
-            return value;
+
+            _Value = value;
         }
-    }
 
-    public static implicit operator NonNullable<T>(T value)
-    {
-        return new NonNullable<T>(value);
-    }
+        public T Value
+        {
+            get
+            {
+                if (_Value == null)
+                {
+                    throw new NullReferenceException(nameof(_Value));
+                }
 
-    public static implicit operator T(NonNullable<T> wrapper)
-    {
-        return wrapper.Value;
+                return _Value;
+            }
+        }
     }
 }
