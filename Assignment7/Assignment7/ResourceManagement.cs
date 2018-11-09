@@ -27,5 +27,11 @@ namespace Assignment7
             Dispose(true);
             resources--;
         }
+
+        ~ResourceManagement()
+        {
+            //run dispose method if programmer forgot.
+            Dispose();
+        }
     }
 }
