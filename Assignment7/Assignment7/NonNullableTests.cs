@@ -6,14 +6,6 @@ namespace Assignment7
     [TestClass]
     public class NonNullableTests
     {
-      
-        [TestMethod]
-        public void Test_Int()
-        {
-            NonNullable<int> NullInt = new NonNullable<int>();
-            Assert.IsNotNull(NullInt);
-            Console.WriteLine(NullInt.ToString());
-        }
         [TestMethod]
         public void String_Value_Null()
         {

@@ -13,19 +13,16 @@ namespace Assignment7
      3. The default constructor can still be invoked when instantiating
         a new NonNullable struct, which bypasses the if check.
      4. Overall, I could not think of a solution that bypassed all of these issues.
+        Implementing the NonNullable type as a struct or a reference type both have
+        their own limitations. 
      */
-    public struct NonNullable<T>
+    public struct NonNullable<T> where T: class
     {
-        private readonly T _Value;
+        private T _Value;
 
         public NonNullable(T value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            _Value = value;
+            _Value = value ?? throw new ArgumentNullException($"{nameof(value)} cannot be null");
         }
 
         public T Value
@@ -34,10 +31,20 @@ namespace Assignment7
             {
                 if (_Value == null)
                 {
-                    throw new NullReferenceException(nameof(_Value));
+                    throw new NullReferenceException($"{nameof(_Value)} cannot be null");
                 }
 
                 return _Value;
+            }
+
+            set
+            {
+                if (_Value == null)
+                {
+                    throw new NullReferenceException($"{nameof(_Value)} cannot be null");
+                }
+
+                _Value = value;
             }
         }
     }
