@@ -41,8 +41,10 @@ namespace Assignment7
         public void String_Null()
         {
             string newString = null;
+            string newString2;
             NonNullable<string> NullString = new NonNullable<string>(newString);
             Assert.IsNull(NullString);
+            Assert.IsNotNull(NullString.Value);
         }
 
     }
