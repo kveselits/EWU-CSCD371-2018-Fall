@@ -23,15 +23,15 @@ namespace Assignment7
 
         public void Dispose()
         {
-            GC.SuppressFinalize(this);
             Dispose(true);
+            GC.SuppressFinalize(this);
             resources--;
         }
 
         ~ResourceManagement()
         {
             //run dispose method if programmer forgot.
-            Dispose();
+            Dispose(false);
         }
     }
 }
