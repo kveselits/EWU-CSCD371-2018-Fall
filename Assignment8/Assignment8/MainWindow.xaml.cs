@@ -26,7 +26,7 @@ namespace Assignment8
             /*ClickMeButton. Click += ClickMeButton_OnClick;
             ClickMeButton.Click -= ClickMeButton_OnClick;*/
             var button = new Button();
-            button.Content = new TextBlock {Text = "kevin"};
+            button.Content = new TextBlock {Text = "Kris"};
             StackPanel.Children.Add(button);
 
         }
