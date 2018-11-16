@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+ using System.Windows.Threading;
 
 namespace Assignment8
 {
@@ -20,9 +21,18 @@ namespace Assignment8
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly DispatcherTimer _timer;
+        private DateTime _lastTickTime;
         public MainWindow()
         {
             InitializeComponent();
+
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(3);
+            _timer.Tick += TimerOnTick;
+            _lastTickTime = DateTime.Now;
+            _timer.Start();
+
             /*ClickMeButton. Click += ClickMeButton_OnClick;
             ClickMeButton.Click -= ClickMeButton_OnClick;*/
             var button = new Button();
@@ -31,14 +41,25 @@ namespace Assignment8
 
         }
 
-        private void ClickMeButton_OnClick(object sender, RoutedEventArgs e)
+        private void TimerOnTick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            DateTime now = DateTime.Now;
+            TimeSpan interval = _lastTickTime - now;
+            _lastTickTime = now;
+             
+           
+            ListOfItems.Items.Add(interval);
         }
 
-        private void ClickMeButton_OnClickXaml(object sender, RoutedEventArgs e)
+        private void ClickMeButton_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+
+            ListOfItems.Items.Add(new ListBoxItem
+            {
+                Content = (ListOfItems.Items.Count + 1)
+            });
+             
         }
+        
     }
 }
