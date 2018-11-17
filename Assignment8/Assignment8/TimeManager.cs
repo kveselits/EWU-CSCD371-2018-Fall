@@ -6,20 +6,20 @@ namespace Assignment8
     public class TimeManager
     {
 
-        public bool Running { get; private set; }
+        public bool Running { get; private set; } = false;
         public IDateTime Current { get; set; }
         public TimeManager(IDateTime current)
         {
             Current = current;
         }
 
-        public string StartTimer()
+        public DateTime StartTimer()
         {
             Running = true;
             return Current.Now();
         }
 
-        public string StopTimer()
+        public DateTime StopTimer()
         {
             if (!Running)
             {
@@ -32,9 +32,9 @@ namespace Assignment8
 
         public class Time : IDateTime
         {
-            public string Now()
+            public DateTime Now()
             {
-                return System.DateTime.Now.ToString(CultureInfo.CurrentCulture);
+                return System.DateTime.Now;
             }
         }
     }

@@ -1,7 +1,9 @@
-﻿namespace Assignment8
+﻿using System;
+
+namespace Assignment8
 {
     public interface IDateTime
     {
-         string Now();
+         DateTime Now();
     }
 }

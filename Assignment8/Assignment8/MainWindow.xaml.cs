@@ -1,19 +1,6 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
- using System.Windows.Media.Animation;
- using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
- using System.Windows.Threading;
+using System.Windows.Threading;
 
 namespace Assignment8
 {
@@ -24,7 +11,7 @@ namespace Assignment8
     {
         private DispatcherTimer Timer { get; }
         private TimeManager Manager { get; }
-        public string LastTickTime { get; set; }
+        public DateTime LastTickTime { get; set; }
 
         public MainWindow()
         {
@@ -32,29 +19,31 @@ namespace Assignment8
             IDateTime timeInterface = new TimeManager.Time();
             Manager = new TimeManager(timeInterface);
             MyClock clock = new MyClock();
-            clock.AddEvent((sender, e) => { GuiClock.Text = clock.CurrentTime; });
+            clock.AddEvent((sender, e) => { GuiClock.Text = clock.CurrentTime.ToString(); });
         }
 
-
-        private void TimerOnTick(object sender, EventArgs e)
+        private void TimerButton_OnClick(object sender, RoutedEventArgs e)
         {
-            /*DateTime now = DateTime.Now;
-            TimeSpan interval = LastTickTime - now;
-            LastTickTime = now;
-             
-           
-            ListOfItems.Items.Add(interval);*/
-        }
-
-        private void ClickMeButton_OnClick(object sender, RoutedEventArgs e)
-        {
-
-            ListOfItems.Items.Add(new ListBoxItem
+            if (!Manager.Running)
             {
-                Content = (ListOfItems.Items.Count + 1)
-            });
-             
+                LastTickTime = Manager.StartTimer();
+                ListOfItems.Items.Add($"Timer Started: {LastTickTime}");
+            }
+            else
+            {
+                DateTime startTime = LastTickTime;
+                LastTickTime = Manager.StopTimer();
+                TimeSpan timeInterval = LastTickTime.Subtract(startTime);
+                ListOfItems.Items.Add(
+                    $"Timer Stopped: {LastTickTime} {Environment.NewLine} " +
+                    $"Elapsed Time:" +
+                    $"{timeInterval.Hours} Hours, " +
+                    $"{timeInterval.Minutes} Minutes," +
+                    $" and {timeInterval.TotalSeconds} seconds" +
+                    $"{Environment.NewLine}");
+            }
+
         }
-        
+
     }
 }

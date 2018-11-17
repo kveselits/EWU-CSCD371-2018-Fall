@@ -7,7 +7,7 @@ namespace Assignment8
     {
         private TimeManager.Time Time { get; }
         private DispatcherTimer Timer { get; }
-        public string CurrentTime { get; set; }
+        public DateTime CurrentTime { get; set; }
         public MyClock()
         {
             Time = new TimeManager.Time();
