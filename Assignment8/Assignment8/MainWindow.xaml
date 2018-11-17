@@ -15,7 +15,8 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="StackPanel" Background="Aqua">
+<StackPanel x:Name="StackPanel" Background="Aqua">
+        <TextBlock x:Name="GuiClock" Background="GreenYellow" FontSize="25"></TextBlock>
             <Button Content="StartTimer" VerticalAlignment="Center" 
                 HorizontalAlignment="Center" x:Name="ClickMeButton"
                 Click="ClickMeButton_OnClick" Margin="0"/>
@@ -28,7 +29,7 @@
                  Grid.Row="0" Background="DarkCyan">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Milliseconds}" Background="GreenYellow" FontSize="25"></TextBlock> 
+                    <!--<TextBlock x:Name="Gu2iClock" Background="GreenYellow" FontSize="25"></TextBlock> -->
                 </DataTemplate>
             </ListBox.ItemTemplate>
             

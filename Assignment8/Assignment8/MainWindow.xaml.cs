@@ -9,7 +9,8 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
+ using System.Windows.Media.Animation;
+ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
  using System.Windows.Threading;
@@ -21,34 +22,28 @@ namespace Assignment8
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly DispatcherTimer _timer;
-        private DateTime _lastTickTime;
+        private DispatcherTimer Timer { get; }
+        private TimeManager Manager { get; }
+        public string LastTickTime { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(3);
-            _timer.Tick += TimerOnTick;
-            _lastTickTime = DateTime.Now;
-            _timer.Start();
-
-            /*ClickMeButton. Click += ClickMeButton_OnClick;
-            ClickMeButton.Click -= ClickMeButton_OnClick;*/
-            var button = new Button();
-            button.Content = new TextBlock {Text = "Kris"};
-            StackPanel.Children.Add(button);
-
+            IDateTime timeInterface = new TimeManager.Time();
+            Manager = new TimeManager(timeInterface);
+            MyClock clock = new MyClock();
+            clock.AddEvent((sender, e) => { GuiClock.Text = clock.CurrentTime; });
         }
+
 
         private void TimerOnTick(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now;
-            TimeSpan interval = _lastTickTime - now;
-            _lastTickTime = now;
+            /*DateTime now = DateTime.Now;
+            TimeSpan interval = LastTickTime - now;
+            LastTickTime = now;
              
            
-            ListOfItems.Items.Add(interval);
+            ListOfItems.Items.Add(interval);*/
         }
 
         private void ClickMeButton_OnClick(object sender, RoutedEventArgs e)

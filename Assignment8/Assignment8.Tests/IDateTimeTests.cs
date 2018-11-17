@@ -9,7 +9,7 @@ namespace Assignment8.Tests
         [TestMethod]
         public void Create_IDateTimeInterface()
         {
-            IDateTime dateInterface = new Assignment8.TimeManager.DateTime();
+            IDateTime dateInterface = new TimeManager.Time();
         }
     }
 }
