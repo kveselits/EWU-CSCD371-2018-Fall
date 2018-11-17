@@ -7,27 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="MyGrid" Margin="40, 10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-<StackPanel x:Name="StackPanel" Background="Aqua">
-        <TextBlock x:Name="GuiClock" Background="GreenYellow" FontSize="25"></TextBlock>
+        <StackPanel x:Name="StackPanel" Background="Blue">
+            <TextBlock x:Name="GuiClock" Background="Blue"  FontSize="25" Foreground="Cyan"></TextBlock>
             <Button Content="StartTimer" VerticalAlignment="Center" 
                 HorizontalAlignment="Center" x:Name="ClickMeButton"
                 Click="TimerButton_OnClick" Margin="0"/>
-            <TextBlock FontSize="40">
-                <TextBlock.Text>Timer </TextBlock.Text>
-            </TextBlock>
+            <ListBox x:Name="ListOfItems" Background="Cyan">
+            </ListBox>
         </StackPanel>
-            <StackPanel Background="Crimson" Grid.Row="1"></StackPanel>
-        <ListBox x:Name="ListOfItems" Grid.Column="1" Grid.RowSpan="2" 
-                 Grid.Row="0" Background="DarkCyan">
-        </ListBox>
-    </Grid> 
+
+    </Grid>
 </Window>
  
