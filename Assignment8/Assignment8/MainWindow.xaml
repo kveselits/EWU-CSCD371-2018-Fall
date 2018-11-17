@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:Assignment8"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="MyGrid" Margin="40, 10">
-        <StackPanel x:Name="StackPanel" Background="Blue">
-            <TextBlock x:Name="GuiClock" Background="Blue"  FontSize="25" Foreground="Cyan"></TextBlock>
+    <Grid x:Name="MyGrid" Margin="40, 20">
+        <StackPanel x:Name="StackPanel" Background="DimGray">
+            <StackPanel.Effect>
+                <DropShadowEffect></DropShadowEffect>
+            </StackPanel.Effect>
+            <TextBlock x:Name="GuiClock" Background="DarkSlateGray"  FontSize="25" Foreground="White">
+            </TextBlock>
             <Button Content="StartTimer" VerticalAlignment="Center" 
                 HorizontalAlignment="Center" x:Name="ClickMeButton"
                 Click="TimerButton_OnClick" Margin="0"/>
-            <ListBox x:Name="ListOfItems" Background="Cyan">
+            <ListBox x:Name="ListOfItems" Background="DarkSlateGray" Foreground="White">
             </ListBox>
         </StackPanel>
 
