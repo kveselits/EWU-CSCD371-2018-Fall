@@ -11,7 +11,7 @@
             <StackPanel.Effect>
                 <DropShadowEffect></DropShadowEffect>
             </StackPanel.Effect>
-            <TextBlock x:Name="GuiClock" Background="DarkSlateGray"  FontSize="25" Foreground="White">
+            <TextBlock x:Name="GuiClock" Background="DarkSlateGray"  FontSize="20" Foreground="White">
             </TextBlock>
             <Button Content="StartTimer" VerticalAlignment="Center" 
                 HorizontalAlignment="Center" x:Name="ClickMeButton"
