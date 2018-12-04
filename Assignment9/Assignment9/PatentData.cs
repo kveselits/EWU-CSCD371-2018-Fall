@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Assignment9
+﻿namespace Assignment9
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Pulled from: https://github.com/IntelliTect/EssentialCSharp/blob/v7.0/src/Chapter15/Listing15.10.FilteringWithSystem.Linq.Enumerable.Where.cs
+    /// </summary>
     public class Program
     {
         public static void Main()
