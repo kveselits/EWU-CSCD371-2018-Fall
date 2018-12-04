@@ -40,5 +40,13 @@ namespace Assignment9.Tests
             bool equals = inventorLastNames.SequenceEqual(inventorNames);
             Assert.IsFalse(equals);
         }
+        [TestMethod]
+        public void LocationsWithInventor_Returns_String_Success()
+        {
+            string locationsWithInventors = PatentDataAnalyzer.LocationsWithInventors();
+            string[] locationsAra = locationsWithInventors.Split(',');
+            Assert.AreEqual("PA-USA", locationsAra.First());
+            Assert.AreEqual("IL-USA", locationsAra.Last());
+        }
     }
 }

@@ -6,19 +6,23 @@ namespace Assignment9
 {
     public class PatentDataAnalyzer
     {
+        private static long Id(Inventor inventor) => inventor.Id;
+        private static string LastName(Inventor inventor) => inventor.Name.Split().Last();
+        private static string StateCountry(Inventor inventor) => $"{inventor.State}-{inventor.Country}";
+
         public static List<string> InventorNames()
         {
             return PatentData.Inventors.Select(inventor => inventor.Name).ToList();
         }
         public static List<string> InventorNames(string country)
         {
-            if (country == null) throw new ArgumentNullException(nameof(country));
+            if (country is null) throw new ArgumentNullException(nameof(country));
             return PatentData.Inventors
                 .Where(inventor => inventor.Country.Equals(country))
                 .Select(inventor => inventor.Name)
                 .ToList();
         }
-
+        
         public static List<string> InventorLastNames()
         {
             return PatentData.Inventors
@@ -27,8 +31,10 @@ namespace Assignment9
                 .ToList();
         }
 
-        private static long Id(Inventor inventor) => inventor.Id;
+        public static string LocationsWithInventors()
+        {
+            return string.Join(",", PatentData.Inventors.Select(StateCountry).Distinct());
+        }
 
-        private static string LastName(Inventor inventor) => inventor.Name.Split().Last();
     }
 }
