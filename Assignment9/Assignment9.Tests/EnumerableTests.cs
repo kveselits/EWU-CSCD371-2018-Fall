@@ -14,6 +14,7 @@ namespace Assignment9.Tests
             IEnumerable<string> randomizedList = inventorList.Randomize();
             Assert.IsFalse(inventorList.SequenceEqual(randomizedList));
         }
+
         [TestMethod]
         public void Randomize_Returns_RandomizedList_3Invocations()
         {
