@@ -49,7 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assignment9Tests.cs" />
+    <Compile Include="EnumerableTests.cs" />
+    <Compile Include="PatentDataAnalyzerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
